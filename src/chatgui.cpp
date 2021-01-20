@@ -135,8 +135,11 @@ ChatBotPanelDialog::~ChatBotPanelDialog()
     //// STUDENT CODE
     ////
 
+    /*
+    Removed to avoid segmentation fault while exiting the program, replaced by cout to confirm exit
     delete _chatLogic;
-
+    */
+   std::cout << "Destructor ~ChatBotPanelDialog() \n";
     ////
     //// EOF STUDENT CODE
 }
