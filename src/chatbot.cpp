@@ -43,8 +43,64 @@ ChatBot::~ChatBot()
 }
 
 //// STUDENT CODE
-////
+////TO BE REVIEWED
 
+// copy constructor 
+ChatBot::ChatBot(const ChatBot &source) 
+{
+    std::cout << "COPYING content of instance " << &source << " to instance " << this << std::endl;
+
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _image = new wxBitmap(*source._image);
+}
+
+// copy assignment constructor 
+ChatBot &ChatBot::operator=(const ChatBot &source) 
+{
+    std::cout << "ASSIGNING content of instance " << &source << " to instance " << this << std::endl;
+    
+    if (this == &source) {
+        return *this;
+    }
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+	_currentNode = source._currentNode;
+	  delete _image;
+    _image = new wxBitmap(*source._image);
+
+    return *this;
+}
+
+// move constructor 
+ChatBot::ChatBot(ChatBot &&source) 
+{
+    std::cout << "MOVING (constructor) instance " << &source << " to instance " << this << std::endl;
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _image = source._image;
+    source._chatLogic = nullptr;
+    source._rootNode = nullptr;
+    source._image = nullptr;
+}
+
+// move assignment operator
+ChatBot &ChatBot::operator=(ChatBot &&source) 
+{
+    std::cout << "Move (assign) instance " << &source << " to instance " << this << std::endl;
+    if (this == &source) {
+        return *this;
+    }
+    delete _image;
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _image = source._image;
+    source._chatLogic = nullptr;
+    source._rootNode = nullptr;
+    source._image = nullptr;
+
+    return *this;
+}
 ////
 //// EOF STUDENT CODE
 
